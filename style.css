@@ -1,6 +1,11 @@
 input {
     margin: 2px;
+    margin-bottom: .5rem;
     width: 90px;
+}
+
+button {
+    margin-bottom: .5rem;
 }
 
 header {
@@ -12,6 +17,26 @@ header {
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+table {
+    border: solid 1px;
+    border-collapse: collapse;
+    margin-bottom: .5rem;
+}
+
+th {
+    border: solid 1px;
+    padding: 10px;
+    background-color: rgb(209, 209, 209);
+}
+
+td {
+    text-align: left;
+}
+
+h4 {
+    margin: 0;
+}
+
 body, h2 {
     margin: 0;
 }
@@ -21,6 +46,6 @@ main {
     margin: auto;
 }
 
-section {
-    margin-bottom: 2rem;
+.table-head {
+    padding: 1 rem;
 }

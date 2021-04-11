@@ -36,14 +36,14 @@ function readyNow() {
 
 function deleteEmployee() {
     // remove the closest <tr> line of code
-    // $(this).closest('tr').remove();
+    $(this).closest('tr').remove();
 
     // The employee ID should be unique, so if we
     // target the employee ID of the row we want to delete
     // we should be able to access the associated salary 
     // and remove that amount from the global annualSalary amount
-    let target = $(this).closest('tr').data('td');
-    console.log(target);
+    // let target = $(this).closest('tr').data('td');
+    // console.log(target);
 
     // but we ALSO want to update the monthly costs
     // for ( let person of employees ) {
@@ -77,6 +77,8 @@ function writeEmployee() {
         </td>
     </tr>`);
 
+    $('td').css('border-collapse', 'collapse');
+
     // ... and then empty out the input fields
     $('#first-name').val('');
     $('#last-name').val('');
@@ -86,8 +88,13 @@ function writeEmployee() {
 
     // We then want to update the monthly costs section
     // First we update the monthly costs value
+
+    // reinitialize global variables
     monthlyCost = 0;
     annualCost = 0;
+
+    // Loop through employees and recalculate monthly costs
+    // ideally when we remove an employee we can easily 
     for (let person of employees) {
         annualCost += Number(person.salary);
         monthlyCost = Math.round(annualCost/12);
