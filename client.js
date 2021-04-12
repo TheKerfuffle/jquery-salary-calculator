@@ -2,54 +2,43 @@ console.log('b');
 
 $(document).ready(readyNow)
 
+[yes, no, maybeso]
+
 let employees = [];
 let monthlyCost = 0;
 let annualCost = 0;
-{/* <tr>
-                <td>${person.first}</td>
-                <td>${person.last}</td>
-                <td>${person.id}</td>
-                <td>${person.title}</td>
-                <td>${person.salary}</td>
-                <td>
-                    <button class="delete">Delete</button>
-                </td>
-            </tr> 
-        
-        let newEmployee = {
-        first: $('#first-name').val(),
-        last: $('#last-name').val(),
-        id: $('#person-id').val(),
-        title: $('#title').val(),
-        salary: $('#annual-salary').val(),
-    };
-
-    employees.push(newEmployee);
-
-*/}
 
 function readyNow() {
     // Set up event listeners
-    $('#add-employee').on( 'click', writeEmployee);
+    $('#add-employee').on( 'click', writeEmployee );
     $('#out-employees').on( 'click', '.delete', deleteEmployee );
 }
 
 function deleteEmployee() {
-    // remove the closest <tr> line of code
-    $(this).closest('tr').remove();
-
     // The employee ID should be unique, so if we
     // target the employee ID of the row we want to delete
-    // we should be able to access the associated salary 
-    // and remove that amount from the global annualSalary amount
-    // let target = $(this).closest('tr').data('td');
-    // console.log(target);
+    // we should be able to remove the employee from the global
+    // employees array, then call calculateMonthlyCost() to recalculate monthly costs
+    let employeeID = $(this).closest('tr').children('.employeeID').text();
 
-    // but we ALSO want to update the monthly costs
-    // for ( let person of employees ) {
-    //     $()
-    // }
+    for (let person of employees) {
+        
+        // Rather than converting all of the input text to numbers, 
+        // instead we write a truthy (==) statement that will suit our needs
+        // and save us a few lines of code.
+        if (employeeID == person.id) {
+            // console.log that helps determine the element being removed
+            // so that we can check if that's the one we wanted.
+            // console.log('removing', employeeID, person.id);
+            
+            employees.splice(employees.indexOf(person), 1);
 
+            // remove the closest <tr> line of code
+            $(this).closest('tr').remove();
+        }
+    }
+    // We then want to update the monthly costs section
+    calculateMonthlyCost();
 }
 
 function writeEmployee() {
@@ -77,7 +66,7 @@ function writeEmployee() {
         </td>
     </tr>`);
 
-    $('td').css('border-collapse', 'collapse');
+    $('#out-employees').css('border-collapse', 'collapse');
 
     // ... and then empty out the input fields
     $('#first-name').val('');
@@ -87,8 +76,11 @@ function writeEmployee() {
     $('#annual-salary').val('');
 
     // We then want to update the monthly costs section
-    // First we update the monthly costs value
+    calculateMonthlyCost();
+    
+}
 
+function calculateMonthlyCost() {
     // reinitialize global variables
     monthlyCost = 0;
     annualCost = 0;
@@ -98,11 +90,12 @@ function writeEmployee() {
     for (let person of employees) {
         annualCost += Number(person.salary);
         monthlyCost = Math.round(annualCost/12);
-        if (monthlyCost > 20000) {
-            $('#monthly-costs').css('background-color', 'red')
-        }
     }
-    
+    if (monthlyCost > 20000) {
+        $('#monthly-costs').css('background-color', 'red');
+    }
+    if (monthlyCost <= 20000) {
+        $('#monthly-costs').css('background-color', 'white');
+    }
     $('#monthly-costs').text(`Total Monthly Cost: $ ${monthlyCost}`);
-    
 }

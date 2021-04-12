@@ -6,6 +6,7 @@ input {
 
 button {
     margin-bottom: .5rem;
+    margin-top: .5rem;
 }
 
 header {
@@ -17,10 +18,15 @@ header {
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-table {
+table, td, tr {
     border: solid 1px;
     border-collapse: collapse;
     margin-bottom: .5rem;
+    text-align: center;
+}
+
+table {
+    width: 100%;
 }
 
 th {
@@ -29,15 +35,7 @@ th {
     background-color: rgb(209, 209, 209);
 }
 
-td {
-    text-align: left;
-}
-
-h4 {
-    margin: 0;
-}
-
-body, h2 {
+body, h2, h4 {
     margin: 0;
 }
 
@@ -48,4 +46,8 @@ main {
 
 .table-head {
     padding: 1 rem;
+}
+
+#delete-button {
+    width: 108px;
 }
